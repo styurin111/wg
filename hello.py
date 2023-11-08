@@ -19,4 +19,4 @@ def test():
           "AllowedIPs = ")
     return config
 
-test()
+print(test())
