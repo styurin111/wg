@@ -1,10 +1,24 @@
 pipeline {
     agent any
-     
     stages {
-        stage('Build') {
+        stage('Подготовка') {
             steps {
-                sh 'python3 make_config.py'
+                sh "python3 make_config.py"
+            }
+        }
+        stage('Сборка') {
+            steps {
+                echo 'Выполняем команды для сборки'
+            }
+        }
+        stage('Тестирование') {
+            steps {
+                echo 'Тестируем нашу сборку'
+            }
+        }
+        stage('Развертывание') {
+            steps {
+                echo 'Переносим код в рабочую среду или создаем артефакт'
             }
         }
     }
