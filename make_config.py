@@ -12,6 +12,8 @@ AllowedIPs = "8.8.8.8/64"
 
 
 def test():
+    print("This client's config for wireguard")
+    print("")
     config = ("[Peer]" + "\n" +
            "#" + user + "\n" +
            "PublicKey = " + str(public_key) + "\n" +
