@@ -20,7 +20,7 @@ class tools():
 
 class config():
 
-    def create_conf(USER, ADDRESS, PRESHAREDKEY):
+    def create_conf(USER, ADDRESS):
         private_key_client = tools.private_key()
         public_key_server = "o1NMtj0rXQKbYBsYVkB2Dv5N0UHgR6ZrF5S+slt+nhw"
         config = ("####config for client####" + "\n" +
@@ -32,7 +32,7 @@ class config():
                   "DNS = 2001:4860:4860::8888" + "\n" + "\n" +
                   "[Peer]" + "\n" +
                   "PrivateKey = " + public_key_server + "\n" +
-                  "Presharedkey = " + PRESHAREDKEY + "\n" +
+                  "Presharedkey = " + tools.preshared_key + "\n" +
                   "AllowedIPs = 2001:4860:4860::8888, 2001:67c:2b20::/48, 2001:67c:28d4::/48" + "\n" +
                   "PersistentKeepalive = 15" + "\n" +
                   "\n" +
@@ -40,13 +40,13 @@ class config():
                   "\n" +
                   "#" + USER + "\n" +
                   "PublicKey = " + tools.private_key() + "\n" +
-                  "Presharedkey = " + PRESHAREDKEY + "\n" +
+                  "Presharedkey = " + tools.preshared_key + "\n" +
                   "AllowedIPs = " + ADDRESS)
 
         return config
 
 for i in my_list:
-    print(config.create_conf(i[1], i[2], i[3]))
+    print(config.create_conf(i[1], i[2]))
 
 
 
