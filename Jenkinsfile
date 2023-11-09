@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Подготовка') {
             steps {
-                sh "python3 make_config.py"
+                sh "python3 make_config.py 1 1 1"
             }
         }
         stage('Сборка') {
