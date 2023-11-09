@@ -31,8 +31,8 @@ class config():
                   "Address = " + ADDRESS + "\n" +
                   "DNS = 2001:4860:4860::8888" + "\n" + "\n" +
                   "[Peer]" + "\n" +
-                  "PrivateKey = " + public_key_server + "\n" +
-                  "Presharedkey = " + tools.preshared_key + "\n" +
+                  "PrivateKey = " + str(public_key_server) + "\n" +
+                  "Presharedkey = " + tools.preshared_key() + "\n" +
                   "AllowedIPs = 2001:4860:4860::8888, 2001:67c:2b20::/48, 2001:67c:28d4::/48" + "\n" +
                   "PersistentKeepalive = 15" + "\n" +
                   "\n" +
@@ -40,7 +40,7 @@ class config():
                   "\n" +
                   "#" + USER + "\n" +
                   "PublicKey = " + tools.private_key() + "\n" +
-                  "Presharedkey = " + tools.preshared_key + "\n" +
+                  "Presharedkey = " + tools.preshared_key() + "\n" +
                   "AllowedIPs = " + ADDRESS)
 
         return config
