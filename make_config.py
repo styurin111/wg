@@ -1,24 +1,52 @@
-# print('Hello World')
-
-
 import random
 import string
-
-DNS = "2001:4860:4860::8888"
-user = "test"
-public_key = "0000000000"
-preshared_key = "1111111"
-AllowedIPs = "8.8.8.8/64"
+import sys
+from wireguard_tools import WireguardKey
 
 
-def test():
-    print("This's config for client_wireguard")
-    print("")
-    config = ("[Peer]" + "\n" +
-           "#" + user + "\n" +
-           "PublicKey = " + str(public_key) + "\n" +
-          "Presharedkey = " + str(preshared_key) + "\n" +
-          "AllowedIPs = ")
-    return config
+my_list = [sys.argv]
 
-print(test())
+class tools():
+    def private_key():
+        private_key = WireguardKey.generate()
+        return str(private_key)
+
+    def public_key(private_key):
+        public_key = private_key.public_key()
+        return str(public_key)
+
+    def preshared_key(length):
+        return ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(length))
+
+class config():
+
+    def create_conf(USER, ADDRESS, PRESHAREDKEY):
+        private_key_client = tools.private_key()
+        public_key_server = "o1NMtj0rXQKbYBsYVkB2Dv5N0UHgR6ZrF5S+slt+nhw"
+        config = ("####config for client####" + "\n" +
+                  "\n" +
+                  "#" + USER + "\n" +
+                  "[Interface]" + "\n" +
+                  "PrivateKey = " + private_key_client + "\n" +
+                  "Address = " + ADDRESS + "\n" +
+                  "DNS = 2001:4860:4860::8888" + "\n" + "\n" +
+                  "[Peer]" + "\n" +
+                  "PrivateKey = " + public_key_server + "\n" +
+                  "Presharedkey = " + PRESHAREDKEY + "\n" +
+                  "AllowedIPs = 2001:4860:4860::8888, 2001:67c:2b20::/48, 2001:67c:28d4::/48" + "\n" +
+                  "PersistentKeepalive = 15" + "\n" +
+                  "\n" +
+                  "####config for server####" + "\n" +
+                  "\n" +
+                  "#" + USER + "\n" +
+                  "PublicKey = " + tools.private_key() + "\n" +
+                  "Presharedkey = " + PRESHAREDKEY + "\n" +
+                  "AllowedIPs = " + ADDRESS)
+
+        return config
+
+for i in my_list:
+    print(config.create_conf(i[1], i[2], i[3]))
+
+
+
