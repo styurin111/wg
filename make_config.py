@@ -5,6 +5,7 @@ from wireguard_tools import WireguardKey
 
 
 my_list = [sys.argv]
+length = 44
 
 class tools():
     def private_key():
@@ -32,15 +33,15 @@ class config():
                   "DNS = 2001:4860:4860::8888" + "\n" + "\n" +
                   "[Peer]" + "\n" +
                   "PrivateKey = " + str(public_key_server) + "\n" +
-                  "Presharedkey = " + tools.preshared_key() + "\n" +
+                  "Presharedkey = " + str(tools.preshared_key(length)) + "\n" +
                   "AllowedIPs = 2001:4860:4860::8888, 2001:67c:2b20::/48, 2001:67c:28d4::/48" + "\n" +
                   "PersistentKeepalive = 15" + "\n" +
                   "\n" +
                   "####config for server####" + "\n" +
                   "\n" +
                   "#" + USER + "\n" +
-                  "PublicKey = " + tools.private_key() + "\n" +
-                  "Presharedkey = " + tools.preshared_key() + "\n" +
+                  "PublicKey = " + str(tools.private_key()) + "\n" +
+                  "Presharedkey = " + str(tools.preshared_key(length)) + "\n" +
                   "AllowedIPs = " + ADDRESS)
 
         return config
